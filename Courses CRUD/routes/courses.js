@@ -11,7 +11,7 @@ router.get('/course/getall', async (req, res) => {
         res.status(200).json(courses)
 
     } catch (error) {
-        res.status(500).json({error : error.message})
+        res.status(500).json({message : message.error})
     }
 })
 
@@ -31,10 +31,11 @@ router.get('/course/getbyid/:id', async (req, res) => {
 router.post('/course/add', async (req, res) => {
     try {
         const result = await Course.create(req.body)
-        const savedata = result.save()
-        res.status(200).json(savedata)
+        result.save()
+        res.status(200).json(result)
+
     } catch (error) {
-        res.status(500).json({error : error.message})
+        res.status(500).json({message : error.message})
     }
 })
 
@@ -44,13 +45,15 @@ router.put('/course/update/:id', async (req, res) => {
         id = req.params.id
         data = req.body
         const options = {new : true}
-        const result = await Course.findByIdAndUpdate(id, data, options)
+        const result = await Course.findOneAndUpdate(id, data, options)
         //const updatedCourse = await Course.findById(id)
         res.status(200).json(result)
 
 
     } catch (error) {
-        res.status(500).json({error : error.message})
+        res.status(500).json({message : error.message})
+
+
     }
 
     // try {
@@ -74,7 +77,8 @@ router.delete('/course/delete/:id', async (req, res) => {
 
 
     } catch (error) {
-        res.status(500).jsaon({error : error.message})
+        res.status(500).json({message : error.message})
+
     }
 })
 

@@ -9,8 +9,8 @@ const db = require('./db')
 
 
 app.use('/api', router)
-app.use(express.urlencoded({extended : false}))
-// app.use(express.json())
+// app.use(express.urlencoded({extended : false}))
+app.use(express.json())
 app.use(bodyparser.json())
 
 

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-mongoose.connect("mongodb+srv://admin:1234@cluster0.tstxgcn.mongodb.net/node?retryWrites=true&w=majority"
+mongoose.connect(process.env.URL
 ).then(() => {
     console.log("Connected Successfully...")
 }).catch((err) => {
-    console.log(err)
+    res.status(500).json({message : err.message})
 })
